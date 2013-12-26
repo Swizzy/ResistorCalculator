@@ -29,7 +29,7 @@
             return ret;
         }
 
-        private static List<Resistor> MakeMultiList() {
+        private static List<Resistor> MakeMultiList(int bands) {
             var ret = new List<Resistor> {
                 new Resistor("Black", 1),
                 new Resistor("Brown", 10),
@@ -41,9 +41,10 @@
                 new Resistor("Violet", 10000000),
                 new Resistor("Grey", 100000000),
                 new Resistor("White", 1000000000),
-                new Resistor("Gold", 0.1),
-                new Resistor("Silver", 0.01)
+                new Resistor("Gold", 0.1)
             };
+            if (bands >= 5)
+                ret.Add(new Resistor("Silver", 0.01));
             return ret;
         }
 
@@ -74,7 +75,7 @@
         private void Make3Band() {
             band1.DataSource = MakeValueList();
             band2.DataSource = MakeValueList();
-            band3.DataSource = MakeMultiList();
+            band3.DataSource = MakeMultiList(3);
         }
 
         private void Make4Band() {
@@ -86,7 +87,7 @@
             band1.DataSource = MakeValueList();
             band2.DataSource = MakeValueList();
             band3.DataSource = MakeValueList();
-            band4.DataSource = MakeMultiList();
+            band4.DataSource = MakeMultiList(5);
             band5.DataSource = MakeToleranceList();
         }
 
@@ -122,10 +123,10 @@
         private void CalcvalbtnClick(object sender, EventArgs e) { MessageBox.Show(CalcValue(bandc3.Checked ? 3 : bandc4.Checked ? 4 : bandc5.Checked ? 5 : 6)); }
 
         private static string GetReadable(ulong val) {
-            if(val < 10000 && val > 1000)
-                return (val / (double)1000) + "K" + "Ω";
-            if(val > 100000)
-                return (val / (double)1000000) + "M" + "Ω";
+            if(val < 1000000 && val > 1000)
+                return (val / (double) 1000) + "K" + "Ω";
+            if(val > 1000000)
+                return (val / (double) 1000000) + "M" + "Ω";
             return val.ToString(CultureInfo.InvariantCulture) + "Ω";
         }
 
@@ -139,7 +140,7 @@
                 case 3:
                     multi = (Resistor) band3.SelectedItem;
                     tmp = ulong.Parse(ret);
-                    return GetReadable((ulong)(tmp * (multi.IsBelowZero ? multi.Value2 : multi.Value))) + " ± 20%";
+                    return GetReadable((ulong) (tmp * (multi.IsBelowZero ? multi.Value2 : multi.Value))) + " ± 20%";
                 case 4:
                     multi = (Resistor) band3.SelectedItem;
                     tolerance = (Resistor) band4.SelectedItem;
@@ -156,7 +157,7 @@
                     multi = (Resistor) band4.SelectedItem;
                     tolerance = (Resistor) band5.SelectedItem;
                     tmp = ulong.Parse(ret);
-                    return GetReadable((ulong) (tmp * (multi.IsBelowZero ? multi.Value2 : multi.Value))) + " ± " + (tolerance.IsBelowZero ? tolerance.Value2 : tolerance.Value) + "%" + ((Resistor) band6.SelectedItem).Value;
+                    return GetReadable((ulong) (tmp * (multi.IsBelowZero ? multi.Value2 : multi.Value))) + " ± " + (tolerance.IsBelowZero ? tolerance.Value2 : tolerance.Value) + "% " + ((Resistor) band6.SelectedItem).Value + "ppm";
             }
         }
     }
