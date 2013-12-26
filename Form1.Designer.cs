@@ -70,7 +70,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(271, 181);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Color to Value";
             // 
@@ -79,7 +79,7 @@
             this.calcvalbtn.Location = new System.Drawing.Point(183, 136);
             this.calcvalbtn.Name = "calcvalbtn";
             this.calcvalbtn.Size = new System.Drawing.Size(82, 39);
-            this.calcvalbtn.TabIndex = 2;
+            this.calcvalbtn.TabIndex = 0;
             this.calcvalbtn.Text = "Calculate";
             this.calcvalbtn.UseVisualStyleBackColor = true;
             this.calcvalbtn.Click += new System.EventHandler(this.CalcvalbtnClick);
@@ -93,7 +93,7 @@
             this.groupBox2.Location = new System.Drawing.Point(183, 19);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(82, 111);
-            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bands";
             // 
@@ -103,7 +103,7 @@
             this.bandc6.Location = new System.Drawing.Point(6, 88);
             this.bandc6.Name = "bandc6";
             this.bandc6.Size = new System.Drawing.Size(64, 17);
-            this.bandc6.TabIndex = 0;
+            this.bandc6.TabIndex = 11;
             this.bandc6.Text = "6-Bands";
             this.bandc6.UseVisualStyleBackColor = true;
             this.bandc6.CheckedChanged += new System.EventHandler(this.BandCountChanged);
@@ -114,7 +114,7 @@
             this.bandc5.Location = new System.Drawing.Point(6, 65);
             this.bandc5.Name = "bandc5";
             this.bandc5.Size = new System.Drawing.Size(64, 17);
-            this.bandc5.TabIndex = 0;
+            this.bandc5.TabIndex = 10;
             this.bandc5.Text = "5-Bands";
             this.bandc5.UseVisualStyleBackColor = true;
             this.bandc5.CheckedChanged += new System.EventHandler(this.BandCountChanged);
@@ -126,7 +126,7 @@
             this.bandc3.Location = new System.Drawing.Point(6, 19);
             this.bandc3.Name = "bandc3";
             this.bandc3.Size = new System.Drawing.Size(64, 17);
-            this.bandc3.TabIndex = 0;
+            this.bandc3.TabIndex = 8;
             this.bandc3.TabStop = true;
             this.bandc3.Text = "3-Bands";
             this.bandc3.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             this.bandc4.Location = new System.Drawing.Point(6, 42);
             this.bandc4.Name = "bandc4";
             this.bandc4.Size = new System.Drawing.Size(64, 17);
-            this.bandc4.TabIndex = 0;
+            this.bandc4.TabIndex = 9;
             this.bandc4.Text = "4-Bands";
             this.bandc4.UseVisualStyleBackColor = true;
             this.bandc4.CheckedChanged += new System.EventHandler(this.BandCountChanged);
@@ -205,7 +205,7 @@
             this.band6.Location = new System.Drawing.Point(56, 154);
             this.band6.Name = "band6";
             this.band6.Size = new System.Drawing.Size(121, 21);
-            this.band6.TabIndex = 0;
+            this.band6.TabIndex = 6;
             // 
             // band5
             // 
@@ -215,7 +215,7 @@
             this.band5.Location = new System.Drawing.Point(56, 127);
             this.band5.Name = "band5";
             this.band5.Size = new System.Drawing.Size(121, 21);
-            this.band5.TabIndex = 0;
+            this.band5.TabIndex = 5;
             // 
             // band4
             // 
@@ -225,7 +225,7 @@
             this.band4.Location = new System.Drawing.Point(56, 100);
             this.band4.Name = "band4";
             this.band4.Size = new System.Drawing.Size(121, 21);
-            this.band4.TabIndex = 0;
+            this.band4.TabIndex = 4;
             // 
             // band3
             // 
@@ -234,7 +234,7 @@
             this.band3.Location = new System.Drawing.Point(56, 73);
             this.band3.Name = "band3";
             this.band3.Size = new System.Drawing.Size(121, 21);
-            this.band3.TabIndex = 0;
+            this.band3.TabIndex = 3;
             // 
             // band2
             // 
@@ -243,7 +243,7 @@
             this.band2.Location = new System.Drawing.Point(56, 46);
             this.band2.Name = "band2";
             this.band2.Size = new System.Drawing.Size(121, 21);
-            this.band2.TabIndex = 0;
+            this.band2.TabIndex = 2;
             // 
             // band1
             // 
@@ -252,7 +252,7 @@
             this.band1.Location = new System.Drawing.Point(56, 19);
             this.band1.Name = "band1";
             this.band1.Size = new System.Drawing.Size(121, 21);
-            this.band1.TabIndex = 0;
+            this.band1.TabIndex = 1;
             // 
             // Form1
             // 

@@ -10,6 +10,8 @@
             InitializeComponent();
             var ver = Assembly.GetAssembly(typeof(Form1)).GetName().Version;
             Text = string.Format("Resistor Calculator v{0}.{1}", ver.Major, ver.Minor);
+            band1.DataSource = MakeValueList();
+            band2.DataSource = MakeValueList();
             Make3Band();
         }
 
@@ -73,8 +75,6 @@
         }
 
         private void Make3Band() {
-            band1.DataSource = MakeValueList();
-            band2.DataSource = MakeValueList();
             band3.DataSource = MakeMultiList(3);
         }
 
@@ -84,8 +84,6 @@
         }
 
         private void Make5Band() {
-            band1.DataSource = MakeValueList();
-            band2.DataSource = MakeValueList();
             band3.DataSource = MakeValueList();
             band4.DataSource = MakeMultiList(5);
             band5.DataSource = MakeToleranceList();
@@ -97,8 +95,6 @@
         }
 
         private void ClearBands() {
-            band1.DataSource = null;
-            band2.DataSource = null;
             band3.DataSource = null;
             band4.DataSource = null;
             band5.DataSource = null;
@@ -125,8 +121,10 @@
         private static string GetReadable(ulong val) {
             if(val < 1000000 && val > 1000)
                 return (val / (double) 1000) + "K" + "Ω";
-            if(val > 1000000)
+            if (val < 1000000000 && val > 1000000)
                 return (val / (double) 1000000) + "M" + "Ω";
+            if (val > 1000000000)
+                return (val / (double)1000000000) + "G" + "Ω";
             return val.ToString(CultureInfo.InvariantCulture) + "Ω";
         }
 
