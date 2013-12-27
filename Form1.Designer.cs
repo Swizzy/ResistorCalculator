@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.calcvalbtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,8 +48,26 @@
             this.band3 = new System.Windows.Forms.ComboBox();
             this.band2 = new System.Windows.Forms.ComboBox();
             this.band1 = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.output = new System.Windows.Forms.RichTextBox();
+            this.outputcontext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tolerance = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.resistancevalue = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.calccolorbtn = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.gohm = new System.Windows.Forms.RadioButton();
+            this.mohm = new System.Windows.Forms.RadioButton();
+            this.ohm = new System.Windows.Forms.RadioButton();
+            this.kohm = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.outputcontext.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resistancevalue)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -254,11 +273,161 @@
             this.band1.Size = new System.Drawing.Size(121, 21);
             this.band1.TabIndex = 1;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.output);
+            this.groupBox3.Controls.Add(this.tolerance);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.resistancevalue);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.calccolorbtn);
+            this.groupBox3.Controls.Add(this.groupBox5);
+            this.groupBox3.Location = new System.Drawing.Point(289, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(228, 181);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Value to Colors";
+            // 
+            // output
+            // 
+            this.output.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.output.ContextMenuStrip = this.outputcontext;
+            this.output.DetectUrls = false;
+            this.output.Location = new System.Drawing.Point(110, 95);
+            this.output.Name = "output";
+            this.output.ReadOnly = true;
+            this.output.Size = new System.Drawing.Size(112, 77);
+            this.output.TabIndex = 17;
+            this.output.Text = "";
+            this.output.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OutputMouseClick);
+            // 
+            // outputcontext
+            // 
+            this.outputcontext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.outputcontext.Name = "contextMenuStrip1";
+            this.outputcontext.Size = new System.Drawing.Size(103, 26);
+            this.outputcontext.Opening += new System.ComponentModel.CancelEventHandler(this.OutputcontextOpening);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopySelectedOutputText);
+            // 
+            // tolerance
+            // 
+            this.tolerance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tolerance.FormattingEnabled = true;
+            this.tolerance.Location = new System.Drawing.Point(110, 68);
+            this.tolerance.Name = "tolerance";
+            this.tolerance.Size = new System.Drawing.Size(112, 21);
+            this.tolerance.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(110, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Tolerance:";
+            // 
+            // resistancevalue
+            // 
+            this.resistancevalue.Location = new System.Drawing.Point(150, 22);
+            this.resistancevalue.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.resistancevalue.Name = "resistancevalue";
+            this.resistancevalue.Size = new System.Drawing.Size(72, 20);
+            this.resistancevalue.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(107, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Value:";
+            // 
+            // calccolorbtn
+            // 
+            this.calccolorbtn.Location = new System.Drawing.Point(6, 136);
+            this.calccolorbtn.Name = "calccolorbtn";
+            this.calccolorbtn.Size = new System.Drawing.Size(98, 36);
+            this.calccolorbtn.TabIndex = 0;
+            this.calccolorbtn.Text = "Calculate";
+            this.calccolorbtn.UseVisualStyleBackColor = true;
+            this.calccolorbtn.Click += new System.EventHandler(this.CalccolorbtnClick);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.gohm);
+            this.groupBox5.Controls.Add(this.mohm);
+            this.groupBox5.Controls.Add(this.ohm);
+            this.groupBox5.Controls.Add(this.kohm);
+            this.groupBox5.Location = new System.Drawing.Point(9, 19);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(95, 111);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Type";
+            // 
+            // gohm
+            // 
+            this.gohm.AutoSize = true;
+            this.gohm.Location = new System.Drawing.Point(6, 88);
+            this.gohm.Name = "gohm";
+            this.gohm.Size = new System.Drawing.Size(81, 17);
+            this.gohm.TabIndex = 11;
+            this.gohm.Text = "GΩ (GOhm)";
+            this.gohm.UseVisualStyleBackColor = true;
+            // 
+            // mohm
+            // 
+            this.mohm.AutoSize = true;
+            this.mohm.Location = new System.Drawing.Point(6, 65);
+            this.mohm.Name = "mohm";
+            this.mohm.Size = new System.Drawing.Size(83, 17);
+            this.mohm.TabIndex = 10;
+            this.mohm.Text = "MΩ (MOhm)";
+            this.mohm.UseVisualStyleBackColor = true;
+            // 
+            // ohm
+            // 
+            this.ohm.AutoSize = true;
+            this.ohm.Checked = true;
+            this.ohm.Location = new System.Drawing.Point(6, 19);
+            this.ohm.Name = "ohm";
+            this.ohm.Size = new System.Drawing.Size(65, 17);
+            this.ohm.TabIndex = 8;
+            this.ohm.TabStop = true;
+            this.ohm.Text = "Ω (Ohm)";
+            this.ohm.UseVisualStyleBackColor = true;
+            this.ohm.CheckedChanged += new System.EventHandler(this.OhmChanged);
+            // 
+            // kohm
+            // 
+            this.kohm.AutoSize = true;
+            this.kohm.Location = new System.Drawing.Point(6, 42);
+            this.kohm.Name = "kohm";
+            this.kohm.Size = new System.Drawing.Size(79, 17);
+            this.kohm.TabIndex = 9;
+            this.kohm.Text = "KΩ (KOhm)";
+            this.kohm.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 208);
+            this.ClientSize = new System.Drawing.Size(529, 208);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -266,6 +435,12 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.outputcontext.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.resistancevalue)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -291,6 +466,20 @@
         private System.Windows.Forms.ComboBox band1;
         private System.Windows.Forms.Button calcvalbtn;
         private System.Windows.Forms.RadioButton bandc3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button calccolorbtn;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton gohm;
+        private System.Windows.Forms.RadioButton mohm;
+        private System.Windows.Forms.RadioButton ohm;
+        private System.Windows.Forms.RadioButton kohm;
+        private System.Windows.Forms.NumericUpDown resistancevalue;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox tolerance;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RichTextBox output;
+        private System.Windows.Forms.ContextMenuStrip outputcontext;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
     }
 }
 

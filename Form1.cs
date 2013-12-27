@@ -1,6 +1,7 @@
 ﻿namespace ResistorCalculator {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Globalization;
     using System.Reflection;
     using System.Windows.Forms;
@@ -13,6 +14,13 @@
             band1.DataSource = MakeValueList();
             band2.DataSource = MakeValueList();
             Make3Band();
+            tolerance.DataSource = MakeToleranceDisplays();
+            foreach(ToleranceDisplay tmp in tolerance.Items) {
+                if(!tmp.Color.Equals("Gold", StringComparison.CurrentCultureIgnoreCase))
+                    continue;
+                tolerance.SelectedItem = tmp;
+                break;
+            }
         }
 
         private static List<Resistor> MakeValueList() {
@@ -45,7 +53,7 @@
                 new Resistor("White", 1000000000),
                 new Resistor("Gold", 0.1)
             };
-            if (bands >= 5)
+            if(bands >= 5)
                 ret.Add(new Resistor("Silver", 0.01));
             return ret;
         }
@@ -64,6 +72,21 @@
             return ret;
         }
 
+        private static List<ToleranceDisplay> MakeToleranceDisplays() {
+            var ret = new List<ToleranceDisplay> {
+                new ToleranceDisplay("± 0.5%", "Green"),
+                new ToleranceDisplay("± 0.05%", "Grey"),
+                new ToleranceDisplay("± 0.1%", "Violet"),
+                new ToleranceDisplay("± 0.25%", "Blue"),
+                new ToleranceDisplay("± 1%", "Brown"),
+                new ToleranceDisplay("± 2%", "Red"),
+                new ToleranceDisplay("± 5%", "Gold"),
+                new ToleranceDisplay("± 10%", "Silver"),
+                new ToleranceDisplay("± 20%", "")
+            };
+            return ret;
+        }
+
         private static List<Resistor> MakeTempList() {
             var ret = new List<Resistor> {
                 new Resistor("Brown", 100),
@@ -74,9 +97,7 @@
             return ret;
         }
 
-        private void Make3Band() {
-            band3.DataSource = MakeMultiList(3);
-        }
+        private void Make3Band() { band3.DataSource = MakeMultiList(3); }
 
         private void Make4Band() {
             Make3Band();
@@ -116,16 +137,16 @@
                 Make6Band();
         }
 
-        private void CalcvalbtnClick(object sender, EventArgs e) { MessageBox.Show(CalcValue(bandc3.Checked ? 3 : bandc4.Checked ? 4 : bandc5.Checked ? 5 : 6)); }
+        private void CalcvalbtnClick(object sender, EventArgs e) { output.Text = CalcValue(bandc3.Checked ? 3 : bandc4.Checked ? 4 : bandc5.Checked ? 5 : 6); }
 
         private static string GetReadable(ulong val) {
             if(val < 1000000 && val > 1000)
-                return (val / (double) 1000) + "K" + "Ω";
-            if (val < 1000000000 && val > 1000000)
-                return (val / (double) 1000000) + "M" + "Ω";
-            if (val > 1000000000)
-                return (val / (double)1000000000) + "G" + "Ω";
-            return val.ToString(CultureInfo.InvariantCulture) + "Ω";
+                return (val / (double) 1000) + "K Ω";
+            if(val < 1000000000 && val > 1000000)
+                return (val / (double) 1000000) + "M Ω";
+            if(val > 1000000000)
+                return (val / (double) 1000000000) + "G Ω";
+            return val.ToString(CultureInfo.InvariantCulture) + " Ω";
         }
 
         private string CalcValue(int bands) {
@@ -158,5 +179,103 @@
                     return GetReadable((ulong) (tmp * (multi.IsBelowZero ? multi.Value2 : multi.Value))) + " ± " + (tolerance.IsBelowZero ? tolerance.Value2 : tolerance.Value) + "% " + ((Resistor) band6.SelectedItem).Value + "ppm";
             }
         }
+
+        private static string GetBandColor(int value) {
+            switch(value) {
+                case 0:
+                    return "Black";
+                case 1:
+                    return "Brown";
+                case 2:
+                    return "Red";
+                case 3:
+                    return "Orange";
+                case 4:
+                    return "Yellow";
+                case 5:
+                    return "Green";
+                case 6:
+                    return "Blue";
+                case 7:
+                    return "Violet";
+                case 8:
+                    return "Grey";
+                case 9:
+                    return "White";
+                default:
+                    throw new ArgumentOutOfRangeException("value");
+            }
+        }
+
+        private void CalccolorbtnClick(object sender, EventArgs e) { CalcColorBands3((int) resistancevalue.Value); }
+
+        private void CalcColorBands3(int value) {
+            var bandcount = 4;
+            if(ohm.Checked) {
+                bandcount = 4;
+                if(resistancevalue.Value < 10) {
+                    output.Text = "Band 1: Black";
+                    output.AppendText("\r\nBand 2: ");
+                    output.AppendText(GetBandColor(value));
+                    output.AppendText("\r\nBand 3: Black");
+                }
+                else {
+                    var tmps = value.ToString(CultureInfo.InvariantCulture);
+                    if(tmps.Length == 2 && tmps.EndsWith("0", StringComparison.Ordinal)) {
+                        output.Text = "Band 1: ";
+                        output.AppendText(GetBandColor((int) resistancevalue.Value / 10));
+                        output.AppendText("\r\nBand 2: Black");
+                        output.AppendText("\r\nBand 3: Black");
+                    }
+                    else if(tmps.Length == 2) {
+                        output.Text = "Band 1: ";
+                        output.AppendText(GetBandColor(int.Parse(tmps.Substring(0, 1))));
+                        output.AppendText("\r\nBand 2: ");
+                        output.AppendText(GetBandColor(int.Parse(tmps.Substring(1, 1))));
+                        output.AppendText("\r\nBand 3: Black");
+                    }
+                    else {
+                        output.Text = "Band 1: ";
+                        output.AppendText(GetBandColor(int.Parse(tmps.Substring(0, 1))));
+                        output.AppendText("\r\nBand 2: ");
+                        output.AppendText(GetBandColor(int.Parse(tmps.Substring(1, 1))));
+                        output.AppendText("\r\nBand 3: Brown");
+                    }
+                }
+            }
+            else if(kohm.Checked) {
+                //TODO: Add 1k+ ohm resistors here
+            }
+            else if(mohm.Checked) {
+                //TODO: Add 1m+ ohm resistors here
+            }
+            else if(gohm.Checked) {
+                //TODO: Add 1g+ ohm resistors here
+            }
+            if(string.IsNullOrEmpty(((ToleranceDisplay) tolerance.SelectedItem).Color))
+                return;
+            output.AppendText(string.Format("\r\nBand {0}: ", bandcount));
+            output.AppendText(((ToleranceDisplay) tolerance.SelectedItem).Color);
+        }
+
+        private void OhmChanged(object sender, EventArgs e) { resistancevalue.DecimalPlaces = ohm.Checked ? 0 : 1; }
+
+        private void CopySelectedOutputText(object sender, EventArgs e) { output.Copy(); }
+
+        private void OutputcontextOpening(object sender, CancelEventArgs e) { e.Cancel = output.SelectedText.Length <= 0; }
+
+        private void OutputMouseClick(object sender, MouseEventArgs e) { output.SelectAll(); }
+    }
+
+    internal sealed class ToleranceDisplay {
+        public readonly string Color;
+        public readonly string Display;
+
+        public ToleranceDisplay(string display, string color) {
+            Color = color;
+            Display = display;
+        }
+
+        public override string ToString() { return Display; }
     }
 }
